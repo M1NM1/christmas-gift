@@ -1,0 +1,341 @@
+:root {
+    --primary-red: #c92b2b;
+    --primary-green: #1a472a;
+    --gold: #fcc200;
+    --snow-white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --font-heading: 'Mountains of Christmas', cursive;
+    --font-body: 'Outfit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('assets/bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    color: var(--snow-white);
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Snowflake Animation */
+#snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(105vh);
+    }
+}
+
+/* Glassmorphism Card */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    text-align: center;
+}
+
+.container {
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Typography */
+.title {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.highlight {
+    color: var(--gold);
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+/* Countdown Timer */
+#timer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.8rem;
+    border-radius: 10px;
+    min-width: 70px;
+}
+
+.time-unit span {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--gold);
+}
+
+.time-unit label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+    opacity: 0.8;
+}
+
+/* Interactive Button */
+.glow-button {
+    background: var(--primary-red);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(201, 43, 43, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2rem;
+}
+
+.glow-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(201, 43, 43, 0.8);
+    background: #d63d3d;
+}
+
+.glow-button:disabled {
+    background: #555;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+/* Visibility Utilities */
+.hidden {
+    display: none !important;
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Interactive Tree */
+#tree-container {
+    position: relative;
+    width: 300px;
+    /* Adjust based on image aspect ratio */
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+#christmas-tree {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+}
+
+#instruction-text {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: var(--gold);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.7;
+    }
+}
+
+.light {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #333;
+    /* Dark/off state */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.light.on {
+    box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+    background-color: currentColor !important;
+    /* Use the color assigned in JS */
+    animation: twinkle 1.5s infinite alternate;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: rgba(26, 71, 42, 0.85);
+    /* Dark Green tint */
+    max-width: 450px;
+    width: 100%;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    position: relative;
+    border: 1px solid var(--gold);
+}
+
+.modal.visible .modal-content {
+    transform: scale(1);
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: pointer;
+    transition: color 0.2s;
+}
+
+.close:hover {
+    color: var(--gold);
+}
+
+.modal-title {
+    font-family: var(--font-heading);
+    color: var(--gold);
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.message-body p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.signature {
+    margin-top: 2rem;
+    font-style: italic;
+    color: var(--gold);
+    text-align: right !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .title {
+        font-size: 2.5rem;
+    }
+
+    #timer {
+        gap: 0.5rem;
+    }
+
+    .time-unit {
+        min-width: 55px;
+        padding: 0.5rem;
+    }
+
+    .time-unit span {
+        font-size: 1.4rem;
+    }
+}
